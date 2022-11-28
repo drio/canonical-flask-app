@@ -1,0 +1,22 @@
+---
+version: "3.1"
+
+services:
+  canonical-flask-app:
+    container_name: canonical-flask-app
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - ${PY_SERVER_PORT}:${PY_SERVER_PORT}
+    command: >
+      python ./app.py
+    env_file: .env
+    networks:
+      - dataviz-net-v2
+
+
+networks:
+    dataviz-net-v2:
+          external: true

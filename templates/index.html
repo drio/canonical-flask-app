@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Welcome to a great Flask app</title>
+    <style>
+      html,
+      body {
+        padding: 0;
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+          Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+        line-height: 1.6;
+        font-size: 18px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      a {
+        color: #0070f3;
+        text-decoration: none;
+      }
+
+      a:hover {
+        text-decoration: underline;
+      }
+
+      img {
+        max-width: 100%;
+        display: block;
+      }
+
+      .log {
+        font-size: 3rem;
+        padding: 10px;
+      }
+      .container {
+        max-width: 36rem;
+        padding: 0 1rem;
+        margin: 3rem auto 6rem;
+      }
+
+      .header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .backToHome {
+        margin: 3rem 0 0;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="container">
+      <h2 style="color: deeppink">The canonical flask app</h2>
+      <button id="button">Push me 🍎</button>
+      <div id="log" class="log" />
+    </section>
+  </body>
+</html>
+<script>
+  window.onload = function () {
+    const button = document.getElementById("button");
+    const log = document.getElementById("log");
+
+    function fetchData() {
+      fetch("/canonical-flask-app/data", {
+        headers: { "Content-Type": "application/json" },
+      })
+        .then((response) => response.json())
+        .then((data) => (log.innerHTML = data.number))
+        .catch((error) => console.error("Error:", error));
+    }
+
+    button.addEventListener("click", fetchData, false);
+  };
+</script>
